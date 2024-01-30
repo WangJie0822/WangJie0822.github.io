@@ -20,7 +20,8 @@
         }
         var url = q['state'];
         var code = q['code'];
-        if (!!url && !!code) {
+        var tenant = q['tenant'];
+        if (!!url) {
             try {
                 url = window.atob(url);
             } catch (e) {
@@ -35,7 +36,7 @@
                 }
             }
            
-            var lasturl = url + "&code=" + code;
+            var lasturl = url + "&code=" + code + "&tenant=" + tenant;
             document.getElementById('direct').innerText = lasturl;
             document.getElementById('direct').href = lasturl;
             window.location = lasturl;
