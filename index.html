@@ -20,13 +20,35 @@
         }
         var url = q['state'];
         var code = q['code'];
-        document.getElementById('test1').style.display = "";
-        var str = '重定向完成！';
-        if (!url) str += 'No url! url参数为空！';
-        else document.getElementById('test1').innerHTML = '<a href="' + decodeURIComponent(decodeURIComponent(url)) + '">' + decodeURIComponent(decodeURIComponent(url)) + '</a><br>';
-        if (!code) str += 'No code from MS! 微软code为空！';
-        document.getElementById('test1').innerHTML += str + '<br>' + decodeURIComponent(query.replace(/\+/g, '%20'));
+        if (!!url && !!code) {
+            try {
+                url = window.atob(url);
+            } catch (e) {
+                try {
+                    url = window.atob(url + "=");
+                } catch (e) {
+                    try {
+                        url = window.atob(url + "==");
+                    } catch (e) {
+                        url = decodeURIComponent(url);
+                    }
+                }
+            }
+           
+            var lasturl = url + "&code=" + code;
+            document.getElementById('direct').innerText = lasturl;
+            document.getElementById('direct').href = lasturl;
+            window.location = lasturl;
+            document.getElementById('test1').style.display = "";
+        } else {
+            document.getElementById('test1').style.display = "";
+            var str = 'Error! 有误！';
+            if (!url) str += 'No url! url参数为空！';
+            else document.getElementById('test1').innerHTML = '<a href="' + decodeURIComponent(decodeURIComponent(url)) + '">' + decodeURIComponent(decodeURIComponent(url)) + '</a><br>';
+            if (!code) str += 'No code from MS! 微软code为空！';
+            document.getElementById('test1').innerHTML += str + '<br>' + decodeURIComponent(query.replace(/\+/g, '%20'));
             //alert(str);
+        }
     </script>
 </body>
 
