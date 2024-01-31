@@ -40,19 +40,25 @@
             document.getElementById('direct').href = lasturl;
             window.location = lasturl;
             document.getElementById('test1').style.display = "";
-        } else if(!url) {
-            document.getElementById('test1').style.display = "";
-            var str = 'Error! 有误！';
-            if (!url) str += 'No url! url参数为空！';
-            document.getElementById('test1').innerHTML += str + '<br>' + decodeURIComponent(query.replace(/\+/g, '%20'));
-        } else if(!code) {
-            document.getElementById('test1').style.display = "";
-            var str = 'Error! 有误！';
-            document.getElementById('test1').innerHTML = '<a href="' + decodeURIComponent(decodeURIComponent(url)) + '">' + decodeURIComponent(decodeURIComponent(url)) + '</a><br>';
-            if (!code) str += 'No code from MS! 微软code为空！';
-            document.getElementById('test1').innerHTML += str + '<br>' + decodeURIComponent(query.replace(/\+/g, '%20'));
         } else {
-             window.location = 'http://wangjie0822.top';
+            document.getElementById('test1').style.display = "";
+            var str = 'Error! 有误！';
+            var hasParams = false;
+            if (!url) {
+                str += 'No url! url参数为空！';
+            } else {
+                document.getElementById('test1').innerHTML = '<a href="' + decodeURIComponent(decodeURIComponent(url)) + '">' + decodeURIComponent(decodeURIComponent(url)) + '</a><br>';
+                hasParams = true;
+            }
+            if (!code) {
+                str += 'No code from MS! 微软code为空！';
+            } else {
+                hasParams = true;
+            }
+            document.getElementById('test1').innerHTML += str + '<br>' + decodeURIComponent(query.replace(/\+/g, '%20'));
+            if(hasParams) {
+                 window.location = 'http://wangjie0822.top';
+            }
         }
     </script>
 </body>
